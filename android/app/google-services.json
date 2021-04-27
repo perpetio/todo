@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "442367716935",
+    "project_id": "todo-list-3715c",
+    "storage_bucket": "todo-list-3715c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442367716935:android:60d04f4332fe8a18730b62",
+        "android_client_info": {
+          "package_name": "com.denyaheras.todo_list_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442367716935-0dsl6nctqtd798g4oovuq5fpq95e75gm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB98EGEb_lBADb-4r8SkWIOHQHF2g_koCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442367716935-0dsl6nctqtd798g4oovuq5fpq95e75gm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
