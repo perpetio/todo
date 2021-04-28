@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_flutter/screens/note_screen.dart';
 import 'package:todo_list_flutter/widgets/notes_stream.dart';
 
-final _firestore = FirebaseFirestore.instance;
+import 'registration_screen.dart';
 
 class NotesList extends StatefulWidget {
   @override
@@ -49,7 +48,7 @@ class _NotesListState extends State<NotesList> {
         },
       ),
       body: NotesStream(
-        firestore: _firestore,
+        firestore: firestore,
       ),
     );
   }
