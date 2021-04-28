@@ -36,6 +36,8 @@ class _NoteScreenState extends State<NoteScreen> {
                 _firestore.collection('notes').add({
                   'isChecked': false,
                   'text': noteController.text,
+                  'time': DateTime.parse(DateTime.now().toString())
+                      .millisecondsSinceEpoch,
                 });
                 Navigator.pop(context);
               },

@@ -12,14 +12,14 @@ class NotesList extends StatefulWidget {
 }
 
 class _NotesListState extends State<NotesList> {
-  User loggedInUser;
   final _auth = FirebaseAuth.instance;
 
   void getCurrentUser() {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        loggedInUser = user;
+        User loggedInUser = user;
+        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
