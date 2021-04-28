@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_flutter/models/note_state.dart';
-import 'notes_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NoteScreen extends StatefulWidget {
   @override
@@ -8,7 +7,9 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
-  String text;
+  final TextEditingController noteController = TextEditingController();
+  final _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,17 +22,20 @@ class _NoteScreenState extends State<NoteScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              onChanged: (value) {
-                text = value;
-              },
+              controller: noteController,
             ),
             SizedBox(
               height: 40.0,
             ),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  notes.add(NoteState(text: text));
+                //used to save notes locally
+                // setState(() {
+                //   notes.add(NoteState(text: noteController.text));
+                // });
+                _firestore.collection('notes').add({
+                  'isChecked': false,
+                  'text': noteController.text,
                 });
                 Navigator.pop(context);
               },

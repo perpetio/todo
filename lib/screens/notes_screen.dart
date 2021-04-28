@@ -1,13 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_flutter/models/note_state.dart';
 import 'package:todo_list_flutter/screens/note_screen.dart';
-import 'package:todo_list_flutter/widgets/note.dart';
+import 'package:todo_list_flutter/widgets/notes_stream.dart';
 
-List<NoteState> notes = [
-  NoteState(isChecked: true, text: 'My noteeeee'),
-  NoteState(isChecked: false, text: 'My noteeeee'),
-  NoteState(isChecked: true, text: 'My noteeeee'),
-];
+final _firestore = FirebaseFirestore.instance;
 
 class NotesList extends StatefulWidget {
   @override
@@ -15,7 +12,25 @@ class NotesList extends StatefulWidget {
 }
 
 class _NotesListState extends State<NotesList> {
-  String currText;
+  User loggedInUser;
+  final _auth = FirebaseAuth.instance;
+
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getCurrentUser();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +48,8 @@ class _NotesListState extends State<NotesList> {
               ));
         },
       ),
-      body: Container(
-        child: ListView.builder(
-            itemCount: notes.length,
-            itemBuilder: (context, index) {
-              return Note(
-                isTrue: notes[index].isChecked,
-                title: notes[index].text,
-                onChanged: (value) {
-                  setState(() {
-                    notes[index].changeState();
-                  });
-                },
-              );
-            }),
+      body: NotesStream(
+        firestore: _firestore,
       ),
     );
   }
