@@ -1,6 +1,6 @@
 # ToDo List
 
-ToDo list is a simple app made with Flutter and Firebase to save your daily tasks in the simplest way and get access them from anywhere in the world.
+ToDo list is a simple app made with Flutter and Firebase to save your daily tasks in the simplest way and get access to them from anywhere in the world.
 
 ### Features
 * Personal account
