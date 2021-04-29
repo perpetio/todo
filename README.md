@@ -1,16 +1,19 @@
-# todo_list_flutter
+# ToDo List
 
-ToDo lis made on flutter
+ToDo list is a simple app made with Flutter and Firebase to save your daily tasks in the simplest way and get access them from anywhere in the world.
 
-## Getting Started
+### Features
+* Personal account
+* Add a new task
+* View all of your tasks
+* Mark them as completed
+* Edit task
+* Delete task
 
-This project is a starting point for a Flutter application.
+### Technologies used
+* [Flutter](https://flutter.dev)
+* [Firebase Firestrore](https://pub.dev/packages/cloud_firestore)
+* [Firebase Authentication](https://pub.dev/packages/firebase_auth)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### App demo
+To run the app clone the repository and run the project using flutter run or using your IDE's tools.
