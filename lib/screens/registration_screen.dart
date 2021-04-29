@@ -62,6 +62,9 @@ class RegistrationScreen extends StatelessWidget {
                     showRegisterExceptionSnackBar(context, 'Email is in use!');
                   } else if (e.code == 'invalid-email') {
                     showRegisterExceptionSnackBar(context, 'Email is invalid!');
+                  } else if (e.code == 'weak-password') {
+                    showRegisterExceptionSnackBar(
+                        context, 'Password is too weak!');
                   }
                 }
               },

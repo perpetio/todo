@@ -19,7 +19,7 @@ class TasksStream extends StatelessWidget {
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Text('Wait!');
+          return Center(child: Text('Wait!'));
         }
         final tasks = snapshot.data.docs;
         return ListView.builder(
