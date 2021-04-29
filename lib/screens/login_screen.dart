@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:todo_list_flutter/screens/notes_screen.dart';
+import 'package:todo_list_flutter/screens/tasks_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                   if (user != null) {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => NotesList()));
+                        MaterialPageRoute(builder: (context) => TasksList()));
                   }
                 } catch (e) {
                   print(e);

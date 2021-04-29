@@ -1,34 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list_flutter/screens/registration_screen.dart';
 
-import 'note.dart';
+import 'task.dart';
 
-class NotesStream extends StatelessWidget {
+class TasksStream extends StatelessWidget {
   final FirebaseFirestore firestore;
-  final TextEditingController noteController = TextEditingController();
-  NotesStream({this.firestore});
+  final TextEditingController taskController = TextEditingController();
+  TasksStream({this.firestore});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('notes').orderBy('time').snapshots(),
+      stream: firestore
+          .collection('users')
+          .doc(auth.currentUser.uid)
+          .collection('tasks')
+          .orderBy('time')
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Text('Wait!');
         }
-        final notes = snapshot.data.docs;
+        final tasks = snapshot.data.docs;
         return ListView.builder(
-            itemCount: notes.length,
+            itemCount: tasks.length,
             itemBuilder: (context, index) {
-              String id = notes[index].id;
+              String id = tasks[index].id;
               return Note(
-                key: ValueKey(notes[index]),
-                isTrue: notes[index].data()['isChecked'],
-                title: notes[index].data()['text'],
+                key: ValueKey(tasks[index]),
+                isTrue: tasks[index].data()['isChecked'],
+                title: tasks[index].data()['text'],
                 onCardTap: () {
                   showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        noteController.text = notes[index].data()['text'];
+                        taskController.text = tasks[index].data()['text'];
                         return Container(
                           color: Colors.white,
                           child: Padding(
@@ -37,16 +43,18 @@ class NotesStream extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 TextField(
-                                  controller: noteController,
+                                  controller: taskController,
                                   decoration: InputDecoration(),
                                 ),
                                 SizedBox(height: 20.0),
                                 ElevatedButton(
                                   onPressed: () {
                                     firestore
-                                        .collection('notes')
+                                        .collection('users')
+                                        .doc(auth.currentUser.uid)
+                                        .collection('tasks')
                                         .doc(id)
-                                        .update({'text': noteController.text});
+                                        .update({'text': taskController.text});
                                     Navigator.of(context).pop();
                                   },
                                   child: Text('Save note'),
@@ -58,12 +66,19 @@ class NotesStream extends StatelessWidget {
                       });
                 },
                 onDismissed: (dismiss) {
-                  firestore.collection('notes').doc(id).delete();
+                  firestore
+                      .collection('users')
+                      .doc(auth.currentUser.uid)
+                      .collection('tasks')
+                      .doc(id)
+                      .delete();
                 },
                 onCheckboxChanged: (value) {
-                  bool myValue = !notes[index].data()['isChecked'];
+                  bool myValue = !tasks[index].data()['isChecked'];
                   firestore
-                      .collection('notes')
+                      .collection('users')
+                      .doc(auth.currentUser.uid)
+                      .collection('tasks')
                       .doc(id)
                       .update({'isChecked': myValue});
                 },

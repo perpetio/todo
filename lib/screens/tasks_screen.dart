@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_flutter/screens/note_screen.dart';
-import 'package:todo_list_flutter/widgets/notes_stream.dart';
+import 'package:todo_list_flutter/screens/task_screen.dart';
+import 'package:todo_list_flutter/widgets/tasks_stream.dart';
 
 import 'registration_screen.dart';
 
-class NotesList extends StatefulWidget {
+class TasksList extends StatefulWidget {
   @override
-  _NotesListState createState() => _NotesListState();
+  _TasksListState createState() => _TasksListState();
 }
 
-class _NotesListState extends State<NotesList> {
+class _TasksListState extends State<TasksList> {
   final _auth = FirebaseAuth.instance;
 
   void getCurrentUser() {
@@ -47,7 +47,7 @@ class _NotesListState extends State<NotesList> {
               ));
         },
       ),
-      body: NotesStream(
+      body: TasksStream(
         firestore: firestore,
       ),
     );

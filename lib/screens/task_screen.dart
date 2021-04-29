@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_list_flutter/screens/registration_screen.dart';
 
 class NoteScreen extends StatefulWidget {
   @override
@@ -7,14 +8,14 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
-  final TextEditingController noteController = TextEditingController();
+  final TextEditingController taskController = TextEditingController();
   final _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create note'),
+        title: Text('Create task'),
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -22,7 +23,7 @@ class _NoteScreenState extends State<NoteScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: noteController,
+              controller: taskController,
             ),
             SizedBox(
               height: 40.0,
@@ -33,9 +34,13 @@ class _NoteScreenState extends State<NoteScreen> {
                 // setState(() {
                 //   notes.add(NoteState(text: noteController.text));
                 // });
-                _firestore.collection('notes').add({
+                _firestore
+                    .collection('users')
+                    .doc(auth.currentUser.uid)
+                    .collection('tasks')
+                    .add({
                   'isChecked': false,
-                  'text': noteController.text,
+                  'text': taskController.text,
                   'time': DateTime.parse(DateTime.now().toString())
                       .millisecondsSinceEpoch,
                 });

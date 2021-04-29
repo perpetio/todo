@@ -9,10 +9,6 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  // void initFirebase() async {
-  //   await Firebase.initializeApp();
-  // }
-
   @override
   void initState() {
     Firebase.initializeApp();
